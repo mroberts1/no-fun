@@ -1,76 +1,132 @@
 ---
 title: ""
-format: 
+format:
   html:
     theme: 
-      light: flatly
-      dark: darkly
+      light: theme.scss
+      dark: slate
     fontsize: 1em
-    linestretch: 1.7
+    linestretch: 1.5
     smooth-scroll: true 
   pdf:
+    pdf-engine: lualatex
     geometry:
-    - top=30mm
-    - left=30mm 
+      - top=30mm
+      - left=30mm
+      - heightrounded
+    mainfont: "Optima"
+    linestretch: 1.2
+    papersize: letter
+    colorlinks: true
   docx: default
 page-layout: article
 fig-responsive: true
-link-external-newwindow: true
-embed-resources: true
+embed-resources: false
+link-external-icon: false
+link-external-newwindow: false
+filters: 
+  - lightbox
+lightbox: auto
+footnotes-hover: true
+bibliography: references.bib
 editor: visual
 ---
 
-### Productivity is Fun
-**Instrumentalized Pleasure and Digital Lifestyles**<br>
+```{r}
+#| label: load-packages
+#| include: false
 
-::: {layout="[[25,75]]"}
+library(tidyverse)
+library(palmerpenguins)
+```
+
+### Productivity is Fun
+#### Instrumentalized Pleasure and Digital Lifestyles<br />
+
+::: {layout="[[30, -2, 70]]"}
 ![](img/inertie-polaire-crop.jpg)
 
-Martin Roberts\
-The Internet as Playground and Factory: A Conference on Digital Labor\
-Eugene Lang College / The New School\
-12-14 November 2009
+Martin Roberts  
+The Internet as Playground and Factory: A Conference on Digital Labor  
+Eugene Lang College / The New School  
+12-14 November 2009  
 :::
 
-### Ceci n'est pas un papier
+#### Ceci n'est pas un papier[^1]
 
 I've been asked not to read a "paper" because it's just not fun, but since my "presentation" is in large degree a *critique* of Fun, it only seems appropriate to *read a paper*, not just to be mean but as a way of trying to show that reading a paper doesn't have to be *not* fun. Before I hear groans from the audience, however \<audience groans\>, let me reassure you that although I will be reading part of what follows, you will still, hopefully, get your expected fix of Fun. For those unable to remain awake during the reading sections, ushers are standing by to douse you with buckets of iced water should the need arise.
 
-### I. Preamble
+#### I. Preamble
 
 This project is part of an ongoing research interest of mine in lifestyle media, "lifestyle" here being defined as a form of reflexive identity specific to modernity in which the self is constructed through practices of consumption, and the role of lifestyle media is both to promote such models of identity and to stigmatize deviations from them.
 
-Of particular interest to me in this context is the notion of **digital lifestyles**, dispersed throughout the discourse networks of electronic media from tech blogs like Gizmodo and Engadget to a never-ending stream of podcasts reviewing the latest tech "toys," and their construction of technocultural capital as the latest episode of Pierre Bourdieu's long-running soap-opera, *Distinction*. The emergence of a battery of new terms based on the word "life,"<SLIDE> from **lifehacking** to the more recent **lifecasting**, is symptomatic of this discourse. Within the field of digital lifestyles, I'm particularly interested in the cult of productivity, exemplified by lifehacker blogs offering tips - renamed "lifehacks" - on everything from **decluttering** one's desk to replacing regular sleep hours with **micronapping**.
+Of particular interest to me in this context is the notion of **digital lifestyles**, dispersed throughout the discourse networks of electronic media from tech blogs to a never-ending stream of podcasts reviewing the latest tech "toys," and their construction of technocultural capital as the latest episode of Pierre Bourdieu's long-running soap-opera, *Distinction*. The emergence of a battery of new terms based on the word **life**, from **lifehacking**[^1] to the more recent **lifecasting**[^2], is symptomatic of this discourse. Within the field of digital lifestyles, I'm particularly interested in the cult of productivity, exemplified by lifehacker blogs offering tips---rechristened "lifehacks"---on everything from **decluttering**[^3] one's desk to replacing regular sleep hours with **micronapping**[^4].
 
-One word which recurs with a mantra-like insistency in the discourse on productivity is the word **fun**, a term that until quite recently has not been generally associated with productivity. Nevertheless, we are today regularly reminded not only that productivity itself is, or should be, fun, and that having fun is about being productive. Consider a typical example from one of the best-known productivity blogs: \<SLIDE: ZEN HABITS\> Fun here becomes a form of instrumentalized pleasure, literally *put to work* as a kind of Jedi mind trick designed to make us feel better about work, which as we can see here includes the (often uncompensated) work of producing blogs about productivity. I understand that a lot of people these days get paid to have fun, and I suppose that if there's one thing better than having fun, it's getting paid to have fun. But there's still something rather insidious, rather coercive, about these continual injunctions to "have fun." Whose interests, we may wonder, is our Fun ultimately serving? The disappearing distinction between labor and leisure in the digital economy - one of the major themes of this conference - is by now a truism, perhaps best exemplified in the much-discussed example of the Chinese gold farmers. The digital fun of playing videogames, it seems, is no longer fun when you have to play for 12 hour shifts to collect enough virtual capital to convert into real-world capital so you can make a living. In some ways, the equation between productivity and fun can be seen as a logical outcome of this elision between labor and leisure: if Fun has usually been more often associated with Play than Work, when Play *becomes* Work, Work becomes Fun. \[SLIDE\] Fun is one of the dominant values of the contemporary global culture industries, comparable in its polymorphousness and its ideological power to terms such as "cool." Also characteristic of postmodernity in its emphases on superficiality, speed, and ephemerality: Fun does not require of its subjects a serious, sustained engagement; it skims lightly across surfaces; it is the quick fix. Its most typical form today is perhaps the late-night talkshow host's monolog, which at the end of the working day pokes harmless fun at events in the "real" worlds of politics, the economy, and celebrity culture.
+One word which recurs with a mantra-like insistency in the discourse on productivity is the word **fun**, a term that until quite recently has not been generally associated with productivity. Nevertheless, we are today regularly reminded not only that productivity itself is, or should be, fun, and that having fun is about being productive. Consider a typical example from one of the best-known productivity blogs, Leo Babauta's *Zen Habits*.[^5] 
 
-Rather than a social obligation, having fun is today a form of citizenship, an indicator of responsible participation in society: if you aren't having fun, there must be something wrong with you. To question the legitimacy of Fun, then, is to engage in a kind of heresy, even blasphemy, to risk being labelled a curmudgeon, a killjoy, or - worst of all - an elitist. We need to ignore such charges, at least provisionally, and look for support to other heretics braver and smarter than ourselves. We need a curmudgeon. In short, we need Adorno.
+:::{.column-margin}
+![](img/zen-habits.jpg){width=50%)}
+:::
 
-![](img/adorno.jpg)
+Fun here becomes a form of instrumentalized pleasure, literally *put to work* as a kind of Jedi mind trick designed to make us feel better about work, which as we can see here includes the (often uncompensated) work of producing blogs about productivity. I understand that a lot of people these days get paid to have fun, and I suppose that if there's one thing better than having fun, it's getting paid to have fun. But there's still something rather insidious, rather coercive, about these continual injunctions to "have fun." Whose interests, we may wonder, is our Fun ultimately serving? The disappearing distinction between labor and leisure in the digital economy---one of the major themes of this conference---is by now a truism, perhaps best exemplified in the much-discussed example of the Chinese gold farmers. The digital fun of playing videogames, it seems, is no longer fun when you have to play for 12 hour shifts to collect enough virtual capital to convert into real-world capital so you can make a living. In some ways, the equation between productivity and fun can be seen as a logical outcome of this elision between labor and leisure: if Fun has usually been more often associated with Play than Work, when Play *becomes* Work, Work becomes Fun. Fun is one of the dominant values of the contemporary global culture industries, comparable in its polymorphousness and its ideological power to terms such as "cool." Also characteristic of postmodernity in its emphases on superficiality, speed, and ephemerality: Fun does not require of its subjects a serious, sustained engagement; it skims lightly across surfaces; it is the quick fix. Its most typical form today is perhaps the late-night talkshow host's monolog, which at the end of the working day pokes harmless fun at events in the "real" worlds of politics, the economy, and celebrity culture.
 
-### II\. A Brief History of Fun
+Rather than a social obligation, having fun is today a form of citizenship, an indicator of responsible participation in society: if you aren't having fun, there must be something wrong with you. To question the legitimacy of Fun, then, is to engage in a kind of heresy, even blasphemy, to risk being labelled a curmudgeon, a killjoy, or---worst of all---an elitist. We need to ignore such charges, at least provisionally, and look for support to other heretics braver and smarter than ourselves. We need a curmudgeon. In short, we need Adorno.
+
+::: {column-page}
+![](img/adorno-large.jpg)
+:::
+
+#### II. A Brief History of Fun
+
+:::{.column-margin}
+<br />
+<br />
+<br />
+![](img/coney-island.jpg)
+:::
 
 The debate about Fun has to date taken place on the terrain of consumption rather than production, in the opposition between the commodified products of the culture industry and art, and is most often associated with the aesthetic theory of Theodor Adorno. In Adorno's writings on the culture industry, as Erica Weitzman suggests in a recent article, Fun 
 
->usually functions . . . as a kind of cipher for the emptiest and most mind-numbing experiences of the culture industry's relentlessly amusing products (186). 
-
-<CONEY ISLAND CLIP> 
-
-::: {.column-margin}
-<iframe width="175" height="100" src="video/steeplechase-park.m4v"></iframe>
-:::
+>usually functions . . . as a kind of cipher for the emptiest and most mind-numbing experiences of the culture industry's relentlessly amusing products [@weitzman2008: 186]. 
 
 For Marxists like Maxim Gorky, or of course Adorno himself, the amusement parks of Coney Island are really no fun at all, but just another kind of work, a carnivalesque inversion of the world of labor which enables workers to let off steam and restore themselves before returning to the factory the following week. Fun, writes Adorno, is a "medicinal bath" which the "pleasure industry" never fails to prescribe. As Erica Weitzman notes, for Adorno, 
 
->\[F\]un" is not even pleasure but the simulacrum of pleasure, a temporary release which enables the enjoying subject to forget the forces of domination and unfreedom to which he or she is actually in thrall. \[. . .\] 
+:::{.column-margin}
+{{< video video/steeplechase-park.mp4 width="320" height="180" >}}
+:::
 
-Moreover, for Adorno "fun" is in many cases not even the specious satisfaction of simuacra or an anticipation which provides a sparkling facade for political coercion; it is the coercion itself, a sadistic cultural mandate to enjoy. Fun in this case is a kind of commodity as such, the token of a pseudo-solidarity which is normative a priori. \[. . . \] "Fun" is here no more and no less than the agreement that one if "having fun," a tautological performance of pleasurability that only serves to reinforce the status quo (186). 
+>"[F]un" is not even pleasure but the simulacrum of pleasure, a temporary release which enables the enjoying subject to forget the forces of domination and unfreedom to which he or she is actually in thrall [@weitzman2008: 186].
 
-To invoke Adorno in this context is inevitably, of course, to invite the by-now routine accusations of elitism. As the art critic Catherine Liu recently observed, dancing on the grave of the Frankfurt School has for some time now been a favorite activity of market populists, with Adorno's probably the favorite one in the cemetery. But Liu's own work is itself a critique of such market populism, notably its recent efforts to restore the pleasure principle of art, a project which in part involves the ritual dragon-slaying of modernist cultural critics. I share Liu's scepticism about the project of contemporary artists, critics, and curators of "putting the fun back into Art," and agree that this need not necessarily entail a return of Adorno's highly prescriptive positions on avant-garde Art. In a cultural context in which Fun is no longer associated just with consumption but is routinely invoked in the context of production, Adorno's work would seem to be a useful starting-point for dissenting from such notions.
+Moreover, for Adorno "fun" is in many cases not even the specious satisfaction of simuacra or an anticipation which provides a sparkling facade for political coercion; it is the coercion itself, a sadistic cultural mandate to enjoy. Fun in this case is a kind of commodity as such, the token of a pseudo-solidarity which is normative a priori. [. . . ] "Fun" is here no more and no less than the agreement that one if "having fun," a tautological performance of pleasurability that only serves to reinforce the status quo (186). 
 
-### III. Digital Fun 
-What would Adorno make of the notion that labor itself, and specifically digital labor, is Fun? Without presuming to "channel" him, I think he would see the ubiquity of Fun in contemporary discourses on productivity, and specifically digital productivity, as in many ways a logical consequence of the historical shift from modernity to postmodernity, a process which in large part has involved a massive expansion of the Culture Industry itself and the increasing dominance of what are now called the Creative Industries in global economic production. As economic productivity and labor themselves have increasingly come to be organized around the manufacture of Fun, it becomes quite logical that labor in its turn should come to be seen as Fun. In a cultural economy where Fun is the primary commodity, producing it becomes Fun almost by definition: "I design video games for a living: what do you do?" For Adorno, Fun has always been a form of work anyway, so actually producing Fun only makes that connection explicit. But if Fun is "a play that is no longer play, a pleasure that is no longer pleasure, childishness without childlikeness" in his famous phrase, we should be as suspicious of contemporary notions of productive Fun as he was of the commodified Fun of Coney Island and Hollywood. Is there any escape, then, from the kingdom of Fun, or are we destined, like Patrick McGoohan's character in The Prisoner, forever to be dragged back to shore by the sinister giant balloon known as Rover to the artificial utopia of Portmeirion? I'm not sure there is, but if there is, it will involve the repudiation of the values of superficiality, frivolity, speed, and ephemerality which Fun stands for, and a revaluing of their opposites: slowness, deep immersion, and seriousness. There are signs, in fact, of such a repudiation, most notably in the Slow Food movement's rebellion against fast food. 
+To invoke Adorno in this context is inevitably, of course, to invite the by-now routine accusations of elitism. As the art critic Catherine Liu recently observed [-@liu2005: 217], dancing on the grave of the Frankfurt School has for some time now been a favorite activity of market populists, with Adorno's probably the favorite one in the cemetery. But Liu's own work is itself a critique of such market populism, notably its recent efforts to restore the pleasure principle of art, a project which in part involves the ritual dragon-slaying of modernist cultural critics. I share Liu's scepticism about the project of contemporary artists, critics, and curators of "putting the fun back into Art," and agree that this need not necessarily entail a return of Adorno's highly prescriptive positions on avant-garde Art. In a cultural context in which Fun is no longer associated just with consumption but is routinely invoked in the context of production, Adorno's work would seem to be a useful starting-point for dissenting from such notions.
 
-### IV. The End of Fun
-<SEX PISTOLS CLIP> 
-As the song makes self-reflexively clear, productivity here - in this case the commodified labor of musical performance - is no fun at all, and it's no surprise to discover that what we just watched was the band's very last public performance. I sometimes wonder what Adorno would have made of this clip - either he'd have loved it as a radical negation of everything that Fun stands for, or hated it as the ultimate degradation of the culture industry. Although I think I'm wrong, I'd like to imagine it would be the former rather than the latter. I'm not sure I'd describe preparing this presentation as Fun, although it was, undeniably, Productive, and I hope rewarding.
+#### III. Digital Fun 
+What would Adorno make of the notion that labor itself, and specifically digital labor, is Fun? Without presuming to "channel" him, I think he would see the ubiquity of Fun in contemporary discourses on productivity, and specifically digital productivity, as in many ways a logical consequence of the historical shift from modernity to postmodernity, a process which in large part has involved a massive expansion of the Culture Industry itself and the increasing dominance of what are now called the Creative Industries in global economic production. As economic productivity and labor themselves have increasingly come to be organized around the manufacture of Fun, it becomes quite logical that labor in its turn should come to be seen as Fun. In a cultural economy where Fun is the primary commodity, producing it becomes Fun almost by definition: "I design video games for a living: what do you do?" For Adorno, Fun has always been a form of work anyway, so actually producing Fun only makes that connection explicit. But if Fun is "a play that is no longer play, a pleasure that is no longer pleasure, childishness without childlikeness" [@weitzman2008: 188] in his famous phrase, we should be as suspicious of contemporary notions of productive Fun as he was of the commodified Fun of Coney Island and Hollywood. 
+
+Is there any escape, then, from the kingdom of Fun, or are we destined, like Patrick McGoohan's character in The Prisoner, forever to be dragged back to shore by the sinister giant balloon known as Rover to the artificial utopia of Portmeirion? I'm not sure there is, but if there is, it will involve the repudiation of the values of superficiality, frivolity, speed, and ephemerality which Fun stands for, and a revaluing of their opposites: slowness, deep immersion, and seriousness. There are signs, in fact, of such a repudiation, most notably in the Slow Food movement's rebellion against fast food. 
+
+#### IV. No Fun
+
+:::{.column-margin}
+<br />
+<br />
+<br />
+{{< video video/no-fun.mp4 width="320" height="180" >}}
+
+The Sex Pistols, "No Fun," Winterland, San Francisco, 14 January 1978. 
+:::
+ 
+As the song makes self-reflexively clear, productivity here---in this case the commodified labor of musical performance---is no fun at all, and it's no surprise to discover that what we just watched was the band's very last public performance. I sometimes wonder what Adorno would have made of this clip---either he'd have loved it as a radical negation of everything that Fun stands for, or hated it as the ultimate degradation of the culture industry. Although I think I'm wrong, I'd like to imagine it would be the former rather than the latter. I'm not sure I'd describe preparing this presentation as Fun, although it was, undeniably, Productive, and I hope rewarding.
+
+[^1]: I know that isn't French.
+
+[^2]: [![](img/lifehacker.jpg)](https://lifehacker.com)
+
+[^3]: ![](img/lifecasting.jpg)
+
+[^4]: ![](img/uncluttering.jpg)]
+
+[^5]: ![](img/micronapping.jpg)
+
+[^5]: [![](img/zen-habits.jpg)](https://zenhabits.net/)
